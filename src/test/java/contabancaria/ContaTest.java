@@ -117,6 +117,14 @@ class ContaTest {
     }
 
     //    - Depósito em conta inativa lança IllegalStateException
+    @Test
+    void depositar_ContaInativa_LancaIllegalStateException() {
+        var conta = new Conta("Maria");
+        conta.encerrar();
+
+        assertThrows(IllegalStateException.class, () -> conta.depositar(10));
+        assertEquals(0, conta.getSaldo(), 0.001);
+    }
     // =======================================================
 
 
