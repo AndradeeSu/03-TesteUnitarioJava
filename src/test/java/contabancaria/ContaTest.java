@@ -175,6 +175,16 @@ class ContaTest {
     //  Testes para transferir
     //  Sugestão de testes:
     //    - Transferência válida atualiza saldo de ambas as contas
+    @Test
+    void transferir_ValorValido_AtualizaSaldoDeAmbasContas() {
+        var origem = new Conta("Maria", 200);
+        var destino = new Conta("João", 100);
+
+        origem.transferir(destino, 50);
+
+        assertEquals(150, origem.getSaldo(), 0.001);
+        assertEquals(150, destino.getSaldo(), 0.001);
+    }
     //    - Transferência com saldo insuficiente lança exceção
     //    - Transferência com valor zero/negativo lança exceção
     //    - Transferência com conta origem inativa lança exceção
