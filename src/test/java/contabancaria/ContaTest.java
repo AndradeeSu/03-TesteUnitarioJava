@@ -160,6 +160,14 @@ class ContaTest {
         assertEquals(100, conta.getSaldo(), 0.001);
     }
     //    - Saque em conta inativa lança IllegalStateException
+    @Test
+    void sacar_ContaInativa_LancaIllegalStateException() {
+        var conta = new Conta("Maria");
+        conta.encerrar();
+
+        assertThrows(IllegalStateException.class, () -> conta.sacar(10));
+        assertEquals(0, conta.getSaldo(), 0.001);
+    }
     // =======================================================
 
 
