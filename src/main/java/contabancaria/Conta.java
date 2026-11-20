@@ -61,6 +61,9 @@ public class Conta {
      */
     public void depositar(double valor) {
         validarValorPositivo(valor);
+        if (!ativa) {
+            throw new IllegalStateException("A conta está encerrada.");
+        }
         saldo += valor;
     }
 
