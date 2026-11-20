@@ -187,6 +187,16 @@ class ContaTest {
     }
     //    - Transferência com saldo insuficiente lança exceção
     //    - Transferência com valor zero/negativo lança exceção
+    @ParameterizedTest
+    @ValueSource(doubles = {0, -10})
+    void transferir_ValorZeroOuNegativo_LancaIllegalArgumentException(double valor) {
+        var origem = new Conta("Maria", 200);
+        var destino = new Conta("João", 100);
+
+        assertThrows(IllegalArgumentException.class, () -> origem.transferir(destino, valor));
+        assertEquals(200, origem.getSaldo(), 0.001);
+        assertEquals(100, destino.getSaldo(), 0.001);
+    }
     //    - Transferência com conta origem inativa lança exceção
     //    - Transferência com conta destino inativa lança exceção
     // =======================================================
