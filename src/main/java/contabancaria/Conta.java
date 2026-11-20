@@ -45,6 +45,13 @@ public class Conta {
         this(titular, 0);
     }
 
+    // Cria validação de valor
+    private void validarValorPositivo(double valor) {
+        if (valor <= 0) {
+            throw new IllegalArgumentException("O valor deve ser maior que zero.");
+        }
+    }
+
     /**
      * Deposita um valor na conta.
      * Regras:
@@ -53,9 +60,7 @@ public class Conta {
      *   - O saldo deve ser atualizado corretamente.
      */
     public void depositar(double valor) {
-        if (valor <= 0) {
-            throw new IllegalArgumentException("O valor do depósito deve ser maior que zero.");
-        }
+        validarValorPositivo(valor);
         saldo += valor;
     }
 
@@ -68,9 +73,7 @@ public class Conta {
      *   - O saldo deve ser atualizado corretamente.
      */
     public void sacar(double valor) {
-        if (valor <= 0) {
-            throw new IllegalArgumentException("O valor do saque deve ser maior que zero.");
-        }
+        validarValorPositivo(valor);
         if (valor > saldo) {
             throw new IllegalStateException("Saldo insuficiente.");
         }
