@@ -92,6 +92,9 @@ public class Conta {
      *   - O saldo de ambas as contas deve ser atualizado corretamente.
      */
     public void transferir(Conta destino, double valor) {
+        if (!ativa || !destino.isAtiva()) {
+            throw new IllegalStateException("As duas contas devem estar ativas.");
+        }
         sacar(valor);
         destino.depositar(valor);
     }
