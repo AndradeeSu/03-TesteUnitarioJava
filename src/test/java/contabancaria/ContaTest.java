@@ -134,6 +134,14 @@ class ContaTest {
     //    - Saque com valor maior que saldo lança IllegalStateException
     //    - Saque com valor zero lança IllegalArgumentException
     //    - Saque com valor negativo lança IllegalArgumentException
+    @ParameterizedTest
+    @ValueSource(doubles = {0, -10})
+    void sacar_ValorZeroOuNegativo_LancaIllegalArgumentException(double valor) {
+        var conta = new Conta("Maria", 100);
+
+        assertThrows(IllegalArgumentException.class, () -> conta.sacar(valor));
+        assertEquals(100, conta.getSaldo(), 0.001);
+    }
     //    - Saque em conta inativa lança IllegalStateException
     // =======================================================
 
