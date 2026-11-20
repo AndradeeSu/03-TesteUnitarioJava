@@ -3,6 +3,7 @@ package contabancaria;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -139,7 +140,7 @@ class ContaTest {
         assertThrows(IllegalStateException.class, () -> conta.sacar(101));
         assertEquals(100, conta.getSaldo(), 0.001);
     }
-    
+
     //    - Saque com valor zero lança IllegalArgumentException
     //    - Saque com valor negativo lança IllegalArgumentException
     @ParameterizedTest
@@ -169,6 +170,13 @@ class ContaTest {
     //  Testes para encerrar
     //  Sugestão de testes:
     //    - Encerrar conta com saldo zero funciona
+    @Test
+    void encerrar_SaldoZero_DesativaConta() {
+        var conta = new Conta("Maria");
+        conta.encerrar();
+        assertFalse(conta.isAtiva());
+    }
+    
     //    - Encerrar conta com saldo lança IllegalStateException
     //    - Encerrar conta já inativa lança IllegalStateException
     //    - Conta encerrada tem isAtiva() == false
