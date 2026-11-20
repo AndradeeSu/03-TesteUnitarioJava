@@ -114,7 +114,7 @@ class ContaTest {
         assertThrows(IllegalArgumentException.class, () -> conta.depositar(valor));
         assertEquals(100, conta.getSaldo(), 0.001);
     }
-    
+
     //    - Depósito em conta inativa lança IllegalStateException
     // =======================================================
 
@@ -123,6 +123,14 @@ class ContaTest {
     //  Testes para sacar
     //  Sugestão de testes:
     //    - Saque com valor válido atualiza o saldo
+    @Test
+    void sacar_ValorValido_AtualizaSaldo() {
+        var conta = new Conta("Maria", 100);
+
+        conta.sacar(40);
+
+        assertEquals(60, conta.getSaldo(), 0.001);
+    }
     //    - Saque com valor maior que saldo lança IllegalStateException
     //    - Saque com valor zero lança IllegalArgumentException
     //    - Saque com valor negativo lança IllegalArgumentException
